@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic DCA Calculator</title>
+
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Dynamic DCA Calculator</h1>
+        <p class="subtitle">Size your weekly base buy amount across tiered BTC/ETH price levels.</p>
+
+        <div class="card">
+            <p class="section-title">Budget &amp; allocation</p>
+
+            <div class="slider-row">
+                <label>Total budget</label>
+                <input type="range" min="1000" max="100000" step="500" value="20000" id="budget" oninput="update()">
+                <span class="slider-val" id="budget-out">$20,000</span>
+            </div>
+
+            <div class="slider-row">
+                <label>BTC allocation</label>
+                <input type="range" min="0" max="100" step="5" value="70" id="btcpct" oninput="update()">
+                <span class="slider-val" id="btcpct-out">70%</span>
+            </div>
+        </div>
+
+        <div class="card">
+            <p class="section-title">Expected weeks at each price tier</p>
+            <p class="week-summary" id="week-summary"></p>
+
+            <div class="slider-row">
+                <label style="color:#3b6d11;">Weeks &lt; $55K &nbsp;(1×)</label>
+                <input type="range" min="0" max="26" step="1" value="5" id="w1" oninput="clampWeeks('w1'); update()">
+                <span class="slider-val" id="w1-out" style="color:#3b6d11;">5 wks</span>
+            </div>
+
+            <div class="slider-row">
+                <label style="color:#854f0b;">Weeks &lt; $50K &nbsp;(2×)</label>
+                <input type="range" min="0" max="26" step="1" value="8" id="w2" oninput="clampWeeks('w2'); update()">
+                <span class="slider-val" id="w2-out" style="color:#854f0b;">8 wks</span>
+            </div>
+
+            <div class="slider-row">
+                <label style="color:#a32d2d;">Weeks &lt; $45K &nbsp;(3×)</label>
+                <input type="range" min="0" max="26" step="1" value="13" id="w3" oninput="clampWeeks('w3'); update()">
+                <span class="slider-val" id="w3-out" style="color:#a32d2d;">13 wks</span>
+            </div>
+
+            <div class="slider-row">
+                <label style="color:#534ab7;">Weeks &lt; $40K &nbsp;(4×)</label>
+                <input type="range" min="0" max="26" step="1" value="0" id="w4" oninput="clampWeeks('w4'); update()">
+                <span class="slider-val" id="w4-out" style="color:#534ab7;">0 wks</span>
+            </div>
+        </div>
+
+        <div class="card">
+            <p class="section-title">Your x values</p>
+            <div class="metric-grid" id="metric-cards"></div>
+
+            <hr class="divider">
+            <p class="section-title">Capital deployed per tier</p>
+            <div id="tier-bars"></div>
+            <div id="info-boxes"></div>
+
+            <p class="footer">
+                26-week (6-month) horizon. ETH thresholds are proportional estimates based on current BTC/ETH ratio —
+                set your own for precision.<br>
+                Not financial advice. Always invest only what you can afford to hold through drawdowns.
+            </p>
+        </div>
+
+    </div>
+
+    <script src="js/calculator.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/app.js"></script>
+
+</body>
+
+</html>
